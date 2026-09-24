@@ -1,0 +1,102 @@
+baseURL = 'https://silenzio.biz/'
+locale = 'it'
+defaultContentLanguage = 'it'
+title = 'silenzio'
+theme = 'silenzio'
+relativeURLs = false
+canonifyURLs = false
+
+[languages]
+  [languages.it]
+    label = 'ITA'
+    locale = 'it-IT'
+    weight = 1
+
+  [languages.en]
+    label = 'ENG'
+    locale = 'en-US'
+    weight = 2
+    path = 'en'
+
+[params]
+  subGlitch = "NODO ISOLATO - NESSUNA DISSOCIAZIONE CONSENTITA"
+  tagline = "MEMORIA DI SESSIONE ASSEGNATA // NON TENTARE LA CHIUSURA"
+  email = "silenzio@riseup.net"
+  footerText = "SISTEMA IN FASE DI DISINTEGRAZIONE PROGRESSIVA. // THEME: SILENZIO"
+  
+  # URL per il cambio rete (aggiorna l'indirizzo onion con il tuo)
+  clearnetURL = "https://silenzio.biz"
+  onionURL = "http://jmfblxd4phkdmjx7e4coitrm4e6uqiftiptmbn6mdfughxlojafacuyd.onion"
+
+  pgpKey = """-----BEGIN PGP PUBLIC KEY BLOCK-----
+
+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
+=Tq6m
+-----END PGP PUBLIC KEY BLOCK-----"""
+
+  [[params.customLinks]]
+    label = "[ ACCEDI AL BLOG ]"
+    url = "/blog/"
+
+  [[params.customLinks]]
+    label = "[ LINK A BRIAR ]"
+    url = "briar://advddmou6lvmbfjc3pcykbzzkkqa4oexk3i6angtyyumqgkwou6ve"
+    marginTop = "15px"

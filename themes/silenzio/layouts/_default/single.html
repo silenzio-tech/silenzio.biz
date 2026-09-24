@@ -1,0 +1,42 @@
+{{ define "main" }}
+<div style="text-align: center; margin-bottom: 25px;">
+    <h1 style="font-family: monospace; color: #ff3333; font-size: 1.2rem; line-height: 1.4; word-break: break-word; overflow-wrap: break-word; margin: 0; animation: none !important; text-shadow: none !important;">
+        {{ .Title }}
+    </h1>
+</div>
+
+<div class="article-box" style="border: 1px solid #ff3333; background: rgba(10, 10, 10, 0.98); padding: 25px; margin: 0 auto; text-align: left; border-radius: 2px;">
+    
+    {{ if .Date }}
+    <div style="color: #888; font-size: 0.85rem; margin-bottom: 20px; border-bottom: 1px dashed rgba(255, 51, 51, 0.4); padding-bottom: 10px; font-family: monospace;">
+        DATA PUBBLICAZIONE: [{{ .Date.Format "2006-01-02" }}]
+    </div>
+    {{ end }}
+
+    <div class="post-content" style="line-height: 1.7; color: #e0e0e0; font-size: 1rem;">
+        {{ .Content }}
+    </div>
+
+</div>
+
+<!-- Selettore delle lingue dell'articolo, se disponibile -->
+{{ if .IsTranslated }}
+<div class="links" style="margin-top: 25px;">
+    {{ range .Translations }}
+    <a href="{{ .RelPermalink }}" class="link-btn">[ {{ .Language.Params.label | default .Language.Lang | upper }} ]</a>
+    {{ end }}
+</div>
+{{ end }}
+
+<div class="links" style="margin-top: 25px;">
+    <a href="/blog/" class="link-btn">[ TORNA ALL'ARCHIVIO ]</a>
+</div>
+
+<div class="links" style="margin-top: 15px;">
+    <a href="/" class="link-btn">[ TORNA ALLA HOME ]</a>
+</div>
+
+<div class="footer" style="margin-top: 30px;">
+    {{ .Site.Title | lower }}
+</div>
+{{ end }}
