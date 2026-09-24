@@ -3,9 +3,28 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "type": "module",
   "scripts": {
+    "dev": "vite",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "type": "commonjs"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/silenzio-tech/silenzio.biz.git"
+  },
+  "bugs": {
+    "url": "https://github.com/silenzio-tech/silenzio.biz/issues"
+  },
+  "homepage": "https://github.com/silenzio-tech/silenzio.biz#readme",
+  "dependencies": {
+    "@keystatic/core": "^0.6.9",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0"
+  },
+  "devDependencies": {
+    "@keystatic/astro": "^6.0.0",
+    "@vitejs/plugin-react": "^6.1.1",
+    "vite": "^8.3.0"
+  }
 }

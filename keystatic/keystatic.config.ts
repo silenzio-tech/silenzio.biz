@@ -2,14 +2,16 @@ import { config, fields, collection } from '@keystatic/core';
 
 export default config({
   storage: {
-    kind: 'github',
-    repo: 'silenzio-tech/silenzio.biz',
+    kind: 'local',
+  },
+  cloud: {
+    project: 'silenzio-tech/silenzio.biz', // o il nome esatto del progetto registrato su Keystatic Cloud
   },
   collections: {
-    posts: {
+    posts: collection({
       label: 'Articoli',
       slugField: 'title',
-      path: 'content/blogs/*', // Puntato correttamente alla tua cartella
+      path: 'content/blog/*',
       format: { content: 'markdown' },
       schema: {
         title: fields.slug({ name: { label: 'Titolo' } }),
@@ -22,6 +24,6 @@ export default config({
           images: true,
         }),
       },
-    },
+    }),
   },
 });
