@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ARCHIVIO // SILENZIO</title>
+    <style>
+        body { background: #000; color: #e0e0e0; font-family: 'Courier New', Courier, monospace; max-width: 750px; margin: 40px auto; padding: 0 20px; }
+        h1 { color: #ff1111; letter-spacing: 4px; border-bottom: 1px solid rgba(255,0,0,0.4); padding-bottom: 10px; }
+        ul { list-style: none; padding: 0; }
+        li { margin-bottom: 15px; }
+        a { color: #ff3333; text-decoration: none; font-size: 1.1rem; font-weight: bold; }
+        a:hover { background: #ff0000; color: #000; }
+        .post-date { color: #666; font-size: 0.85rem; margin-left: 10px; }
+        .home-btn { display: inline-block; margin-bottom: 20px; color: #888; text-decoration: none; }
+    </style>
+</head>
+<body>
+    <a href="/" class="home-btn"><< TORNA ALLA ROOT</a>
+    <h1>ARCHIVIO TRACCE</h1>
+    <ul>
+        {{ range .Pages }}
+        <li>
+            <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+            <span class="post-date">[{{ .Date.Format "02-01-2006" }}]</span>
+        </li>
+        {{ end }}
+    </ul>
+</body>
+</html>

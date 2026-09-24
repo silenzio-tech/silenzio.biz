@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.Language.Locale | default "it" }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="index, follow">
+    
+    <!-- TITOLO DINAMICO CORRETTO PER OGNI PAGINA -->
+    <title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} // {{ .Site.Title }}{{ end }}</title>
+
+    <style>
+        body, html, .main, canvas {
+            cursor: default !important;
+            background-color: #000 !important; /* Forza lo sfondo nero ovunque ed elimina il bianco */
+        }
+        a, a *, .link-btn, .link-btn * {
+            cursor: pointer !important;
+            pointer-events: auto !important;
+        }
+    </style>
+
+    {{ $style := resources.Get "css/style.css" | minify | fingerprint }}
+    <link rel="stylesheet" href="{{ $style.RelPermalink }}" integrity="{{ $style.Data.Integrity }}">
+</head>
+<body>
+
+    <canvas id="canvas-background"></canvas>
+
+    <div class="main" id="main-panel">
+        {{ block "main" . }}{{ end }}
+    </div>
+</body>
+</html>

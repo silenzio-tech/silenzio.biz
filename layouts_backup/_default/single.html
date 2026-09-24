@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ .Title }} // {{ .Site.Title }}</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <style>
+        body {
+            background-color: #050505;
+            color: #e0e0e0;
+            font-family: monospace;
+            padding: 20px;
+        }
+        .article-box {
+            border: 2px solid #ff3333 !important;
+            box-shadow: 0 0 15px rgba(255, 51, 51, 0.5), inset 0 0 10px rgba(255, 51, 51, 0.1) !important;
+            background-color: rgba(10, 10, 10, 0.95) !important;
+            padding: 25px !important;
+            margin: 25px auto !important;
+            max-width: 800px !important;
+            text-align: left !important;
+            border-radius: 4px !important;
+        }
+        .link-btn {
+            color: #ff3333;
+            text-decoration: none;
+            font-weight: bold;
+            border: 1px solid #ff3333;
+            padding: 8px 15px;
+            display: inline-block;
+            margin: 5px;
+        }
+        .link-btn:hover {
+            background-color: #ff3333;
+            color: #000;
+        }
+
+        /* EFFETTO RETINO E STILE IMMAGINI AUTOMATICO */
+        .post-content img {
+            display: block;
+            max-width: 100%;
+            height: auto;
+            margin: 20px auto;
+            border: 1px solid #ff3333;
+            filter: grayscale(100%) contrast(160%) brightness(90%);
+        }
+
+        .halftone-container {
+            position: relative;
+            display: inline-block;
+            max-width: 100%;
+            margin: 20px 0;
+            border: 1px solid #ff3333;
+        }
+        .halftone-container img {
+            display: block;
+            width: 100%;
+            height: auto;
+            margin: 0;
+            border: none;
+            filter: grayscale(100%) contrast(160%) brightness(90%);
+        }
+        .halftone-container::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, #000 30%, transparent 35%);
+            background-size: 4px 4px; 
+            opacity: 0.45;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+    <div style="text-align: center; margin-top: 30px;">
+        <h1 style="color: #ff3333;">// {{ .Title | upper }} //</h1>
+    </div>
+
+    <!-- RETTANGOLO ROSSO -->
+    <div class="article-box">
+        {{ if .Date }}
+        <div style="color: #888; font-size: 0.85rem; margin-bottom: 20px; border-bottom: 1px dashed #ff3333; padding-bottom: 10px;">
+            DATA PUBBLICAZIONE: [{{ .Date.Format "2006-01-02" }}]
+        </div>
+        {{ end }}
+
+        <div class="post-content" style="line-height: 1.6;">
+            {{ .Content }}
+        </div>
+    </div>
+
+    <div style="text-align: center; margin-top: 30px; margin-bottom: 40px;">
+        {{ if .IsTranslated }}
+            {{ range .Translations }}
+                <a href="{{ .Permalink }}" class="link-btn">[ LINGUA: {{ .Language.LanguageName | upper }} ]</a>
+            {{ end }}
+        {{ end }}
+        <a href="/blog/" class="link-btn">[ TORNA AL BLOG ]</a>
+        <a href="/" class="link-btn">[ HOME ]</a>
+    </div>
+
+    <div style="text-align: center; margin-bottom: 20px; color: #666;">
+        {{ .Site.Title | lower }}
+    </div>
+</body>
+</html>

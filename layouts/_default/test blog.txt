@@ -1,0 +1,172 @@
+{{ define "main" }}
+<style>
+    body, html, .main, canvas {
+        cursor: default !important;
+    }
+    a, a *, .link-btn, .link-btn * {
+        cursor: pointer !important;
+        pointer-events: auto !important;
+    }
+
+    /* Animazione fluida per i simboli // esterni (ripristinata rossa) */
+    @keyframes red-to-bright-white {
+        0%, 100% {
+            color: #ff3333;
+            text-shadow: 0 0 4px rgba(255, 51, 51, 0.4);
+        }
+        50% {
+            color: #ffffff;
+            text-shadow: 0 0 8px rgba(255, 255, 255, 0.9);
+        }
+    }
+
+    /* Struttura Header con griglia a 3 colonne simmetriche */
+    .site-header-grid {
+        display: grid;
+        grid-template-columns: auto 1fr auto;
+        align-items: center;
+        width: 100%;
+        margin-bottom: 30px;
+        gap: 12px;
+    }
+
+    /* Pulsanti superiori ripristinati al rosso originale */
+    .btn-top {
+        height: 40px;
+        padding: 0 12px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        box-sizing: border-box;
+        white-space: nowrap;
+    }
+
+    .btn-left {
+        justify-self: start;
+    }
+
+    .btn-right {
+        justify-self: end;
+    }
+
+    /* Titolo centrale ripristinato al rosso originale */
+    .title-container-centered {
+        grid-column: 2;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 14px;
+        overflow: hidden;
+    }
+
+    .title-slash {
+        font-family: monospace;
+        font-size: 1.6rem;
+        font-weight: bold;
+        animation: red-to-bright-white 2.5s ease-in-out infinite;
+        padding: 0 2px;
+    }
+
+    .title-always-active {
+        font-family: monospace;
+        font-size: 1.6rem;
+        margin: 0;
+        display: inline-block;
+        background-color: #ff3333 !important;
+        color: #000000 !important;
+        border-color: #ff3333 !important;
+        box-shadow: 0 0 18px rgba(255, 51, 51, 0.85) !important;
+        font-weight: bold;
+        pointer-events: none !important;
+        padding: 4px 8px;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+    }
+
+    /* Stile specifico per i titoli degli articoli in blu elettrico brillante */
+    .article-title {
+        color: #1a8cff;
+        text-shadow: 0 0 6px rgba(26, 140, 255, 0.4);
+        font-weight: bold;
+        text-decoration: none;
+        display: block;
+        word-break: break-word;
+        overflow-wrap: break-word;
+        transition: color 0.2s ease, text-shadow 0.2s ease;
+    }
+
+    .article-title:hover {
+        color: #ffffff;
+        text-shadow: 0 0 10px rgba(26, 140, 255, 0.9);
+    }
+
+    /* Rettangolo della pagina convertito in blu elettrico */
+    .blue-page-box {
+        border: 1px solid #1a8cff;
+        padding: 20px;
+        box-shadow: 0 0 15px rgba(26, 140, 255, 0.3);
+        background-color: rgba(26, 140, 255, 0.03);
+    }
+</style>
+
+<div class="site-header-grid">
+    <!-- Pulsante Home a sinistra -->
+    <a href="/" class="link-btn btn-top btn-left">[ HM ]</a>
+
+    <!-- Titolo centrale -->
+    <div class="title-container-centered">
+        <span class="title-slash">//</span>
+        <span class="link-btn title-always-active">ARCHIVIO BLOG</span>
+        <span class="title-slash">//</span>
+    </div>
+
+    <!-- Pulsante Lingua a destra -->
+    {{ if .IsTranslated }}
+        {{ range .Translations }}
+        <a href="{{ .RelPermalink }}" class="link-btn btn-top btn-right" title="{{ .Language.Label }}">
+            [ {{ upper (substr .Language.Lang 0 2) }} ]
+        </a>
+        {{ end }}
+    {{ else }}
+        <div></div>
+    {{ end }}
+</div>
+
+<!-- Contenitore principale (rettangolo della pagina in blu elettrico) -->
+<div class="blue-page-box">
+    <div class="message" style="text-align: left;">
+        <ul style="list-style: none; padding: 0; margin: 0;">
+        {{ range .Pages }}
+            <li style="margin-bottom: 20px;">
+                <a href="{{ .RelPermalink }}" class="article-title">
+                    > {{ .Title }}
+                </a>
+                {{ if .Date }}
+                <span style="color: #888; font-size: 0.85rem; display: block; margin-top: 4px;">
+                    [{{ .Date.Format "2006-01-02" }}]
+                </span>
+                {{ end }}
+            </li>
+        {{ end }}
+        </ul>
+    </div>
+</div>
+
+<!-- Pulsanti nel footer -->
+{{ if .IsTranslated }}
+<div class="links" style="margin-top: 20px;">
+    {{ range .Translations }}
+    <a href="{{ .RelPermalink }}" class="link-btn">[ {{ .Language.Params.label | default .Language.Lang | upper }} ]</a>
+    {{ end }}
+</div>
+{{ end }}
+
+<div class="links" style="margin-top: 20px;">
+    <a href="/" class="link-btn">[ TORNA ALLA HOME ]</a>
+</div>
+
+<div class="footer" style="margin-top: 30px;">
+    {{ .Site.Title | lower }}
+</div>
+{{ end }}

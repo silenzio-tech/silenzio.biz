@@ -1,0 +1,10 @@
+echo "deploy.sh" >> .gitignore
+echo ".deploy.env" >> .gitignore
+echo "pubblica.sh" >> .gitignore
+echo "public/" >> .gitignore
+echo ".hugo_build.lock" >> .gitignore
+deploy.sh
+.deploy.env
+pubblica.sh
+public/
+.hugo_build.lock

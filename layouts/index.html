@@ -1,0 +1,69 @@
+{{ define "main" }}
+<div class="logo-container" style="margin-bottom: 20px;">
+    <div class="logo-wrapper">
+        <img src="{{ "logo.png" | relURL }}" alt="Logo" class="logo-img" style="filter: none; opacity: 1;">
+    </div>
+</div>
+
+<div class="glitch-container" style="margin-bottom: 20px;">
+    <h1 id="dynamicTitle">{{ .Site.Title | lower }}</h1>
+    <div class="sub-glitch">{{ .Site.Params.subGlitch | default "NODO ISOLATO - NESSUNA DISSOCIAZIONE CONSENTITA" }}</div>
+</div>
+
+<div class="tagline" style="margin-bottom: 20px;">>> {{ .Site.Params.tagline | default "MEMORIA DI SESSIONE ASSEGNATA // NON TENTARE LA CHIUSURA" }} &lt;&lt;</div>
+
+<div class="pgp-box" style="margin-bottom: 20px;">
+    <div class="pgp-header">
+        <div class="pgp-title">// SPECIFICHE SERVER ONION MOBILE //</div>
+    </div>
+    <div class="pgp-key-wrapper" style="padding: 15px; display: flex; justify-content: center;">
+        <ul style="margin: 0; padding-left: 0; list-style-position: inside; font-family: monospace; line-height: 1.6; text-align: left; color: inherit; display: inline-block;">
+            <li>Hardware: HUAWEI P20 LITE</li>
+            <li>OS: Android 9</li>
+            <li>RAM: 4 GB (Libera media: ~1,21 GB)</li>
+            <li>Server: Lighttpd v1.4.82</li>
+            <li>Engine: KSWEB 4.07</li>
+            <li>Network: ORBOT 17.9.5-RC-4-tor-0.4.9.11</li>
+        </ul>
+    </div>
+</div>
+
+{{ with .Site.Params.email }}
+<div class="email-container" style="margin-bottom: 20px;">
+    <a href="mailto:{{ . }}" class="email-link">{{ . }}</a>
+</div>
+{{ end }}
+
+<div class="warning" style="margin-bottom: 20px;">
+    ⚠️ VIOLAZIONE DI RETE RILEVATA ⚠️<br>
+    IL TUO HARDWARE STA EMETTENDO RUMORE DI FONDO.
+</div>
+
+{{ with .Site.Params.pgpKey }}
+<div class="pgp-box" id="pgpContainer" style="margin-bottom: 20px;">
+    <div class="pgp-header">
+        <div class="pgp-title">// CHIAVE PUBBLICA PGP //</div>
+    </div>
+    <div class="pgp-key-wrapper">
+        <pre class="pgp-key" id="pgpKeyBlock" style="-webkit-user-select: all !important; -moz-user-select: all !important; user-select: all !important; display: block; cursor: text;">{{ . }}</pre>
+    </div>
+</div>
+{{ end }}
+
+<div class="links" style="margin-bottom: 20px;">
+    {{ range .Site.Params.customLinks }}
+    <a href="{{ .url | safeURL }}" class="link-btn" {{ if .marginTop }}style="margin-top: {{ .marginTop }};"{{ end }}>{{ .label }}</a>
+    {{ end }}
+</div>
+
+<!-- SEZIONE AGGIUNTA: SWITCHER DI RETE ALLINEATO -->
+<div class="links" style="margin-bottom: 20px;">
+    <a href="{{ .Site.Params.clearnetURL }}" class="link-btn" title="Visita la versione in chiaro">🌐 CLEARNET</a>
+    <a href="{{ .Site.Params.onionURL }}" class="link-btn" style="margin-top: 15px;" title="Visita la versione Onion (Richiede Tor Browser)">🧅 ONION</a>
+</div>
+
+<div class="footer">
+    {{ .Site.Params.footerText | default "SISTEMA IN FASE DI DISINTEGRAZIONE PROGRESSIVA." | safeHTML }}<br>
+    {{ .Site.Title | lower }}
+</div>
+{{ end }}
